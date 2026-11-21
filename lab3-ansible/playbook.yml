@@ -1,0 +1,32 @@
+---
+- name: Configure local application
+  hosts: local
+  gather_facts: false
+
+  tasks:
+    - name: Create application directory
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME | default(lookup('env', 'HOME')) }}/lab3-app"
+        state: directory
+        mode: "0755"
+
+    - name: Create application webpage
+      ansible.builtin.copy:
+        dest: "{{ lookup('env', 'HOME') }}/lab3-app/index.html"
+        content: |
+          <html>
+          <body>
+            <h1>Lab 3 - Ansible Automation</h1>
+            <p>Application configured successfully.</p>
+          </body>
+          </html>
+
+    - name: Verify configuration
+      ansible.builtin.command:
+        cmd: cat "{{ lookup('env', 'HOME') }}/lab3-app/index.html"
+      register: webpage
+      changed_when: false
+
+    - name: Display result
+      ansible.builtin.debug:
+        var: webpage.stdout

@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+                sh 'chmod +x app.sh'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing application...'
+                sh './app.sh'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                echo 'Deploying application to Kubernetes...'
+
+                sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl apply -f k8s/service.yaml'
+
+                sh 'kubectl rollout status deployment/my-docker-app'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Kubernetes deployment successful!'
+        }
+
+        failure {
+            echo 'Kubernetes deployment failed!'
+        }
+
+        always {
+            echo 'CI/CD pipeline completed.'
+        }
+    }
+}

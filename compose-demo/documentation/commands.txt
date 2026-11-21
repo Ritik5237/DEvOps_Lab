@@ -1,0 +1,50 @@
+EXPERIMENT 1 — Docker Containerization
+docker build -t my-docker-app:1.0 .
+docker images
+docker run -d --name my-container -p 8080:80 my-docker-app:1.0
+docker ps
+
+EXPERIMENT 5 — Docker Management
+docker images
+docker ps
+docker ps -a
+docker stop management-container
+docker start management-container
+docker rm management-container
+docker tag my-docker-app:1.0 ritiksharma523/my-docker-app:1.0
+docker login
+docker push ritiksharma523/my-docker-app:1.0
+docker compose up -d
+docker compose ps
+docker compose down
+
+EXPERIMENT 6 — Docker Storage
+docker volume create my-volume
+docker volume ls
+docker volume inspect my-volume
+docker run -v my-volume:/data alpine
+docker rm volume-container
+
+EXPERIMENT 7 — Docker Network
+docker network create my-network
+docker network ls
+docker run -d --name server --network my-network nginx:alpine
+docker run -it --name client --network my-network alpine sh
+curl http://server
+docker network inspect my-network
+
+EXPERIMENT 8 — Kubernetes
+minikube start --driver=docker
+kubectl get nodes
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+kubectl get deployments
+kubectl get pods
+kubectl get services
+minikube service my-docker-app-service --url
+
+JENKINS
+git add .
+git commit -m "Add Kubernetes continuous deployment"
+git push
+

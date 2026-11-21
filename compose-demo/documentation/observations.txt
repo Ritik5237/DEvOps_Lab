@@ -1,0 +1,20 @@
+EXPERIMENT 1 — Docker Containerization
+Observation:
+The sample application was successfully containerized using Docker. A Docker image was created using a Dockerfile and a container was successfully executed from the image.
+
+EXPERIMENT 5 — Docker Management
+Observation:
+Docker containers and images were successfully listed, started, stopped and removed. The Docker image was tagged and pushed to Docker Hub. Docker Compose was used to run multiple containers.
+
+EXPERIMENT 6 — Docker Storage
+Observation:
+Data stored in the container writable layer was lost after container deletion. Data stored in a named Docker volume and bind mount remained persistent after deleting the container.
+
+EXPERIMENT 7 — Docker Network
+Observation:
+Two Docker containers successfully communicated through a user-defined Docker network. Communication was verified using both the container name and container IP address.
+
+EXPERIMENT 8 — Kubernetes Continuous Deployment
+Observation:
+The application was deployed to a Kubernetes cluster using Deployment and Service manifests. Jenkins automated the deployment process by applying the Kubernetes manifests through the CI/CD pipeline.
+
